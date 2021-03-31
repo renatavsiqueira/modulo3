@@ -1,0 +1,59 @@
+# Criando tabela de cadastro de clientes
+
+
+CREATE TABLE `clientes` (
+`nome` VARCHAR( 60 ) NOT NULL ,
+`email` VARCHAR( 60 ) NOT NULL ,
+`sexo` VARCHAR( 10 ) NOT NULL ,
+`ddd` INT( 2 ) ,
+`telefone` INT( 8 ) ,
+`login` VARCHAR( 12 ) NOT NULL ,
+`senha` VARCHAR( 12 ) NOT NULL ,
+`id` INT( 200 ) AUTO_INCREMENT ,
+UNIQUE (
+`id` 
+)
+);
+
+
+#Criando Formulário 
+
+
+<html>
+<head>
+<title>Untitled Document</title>
+</head>
+
+<body>
+<?php 
+
+$nome	= $_POST ["nome"];		
+$email	= $_POST ["email"];	
+$ddd	= $_POST ["ddd"];	
+$tel	= $_POST ["telefone"];
+$login	= $_POST ["login"];
+$senha	= $_POST ["senha"];
+
+#Conectando Localhost
+
+$conexao = mysql_connect("localhost","root");
+if (!$conexao)
+	die ("Erro de conexão o seguinte erro ocorreu -> ".mysql_error());
+
+# Conectando com a tabela do banco de dados
+
+$banco = mysql_select_db("clientes",$conexao);
+if (!$banco)
+	die ("Erro de conexão o seguinte erro ocorreu -> ".mysql_error());
+
+
+$query = "INSERT INTO `clientes` ( `nome` , `email` , `sexo` , `ddd` , `telefone` , `login` , `senha` , `id` ) 
+VALUES ('$nome', '$email', '$sexo', '$ddd', '$tel','$login', '$senha',  '')";
+
+mysql_query($query,$conexao);
+
+echo "Seu cadastro foi realizado com sucesso";
+?> 
+</body>
+</html>
+
